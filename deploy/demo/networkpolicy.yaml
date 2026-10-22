@@ -1,0 +1,130 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-ingress
+  namespace: demo
+  labels:
+    app.kubernetes.io/version: "1.0.0"
+  annotations:
+    repair.example.dev/source-path: deploy/demo/networkpolicy.yaml
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-frontend-to-api
+  namespace: demo
+  labels:
+    app.kubernetes.io/version: "1.0.0"
+  annotations:
+    repair.example.dev/source-path: deploy/demo/networkpolicy.yaml
+spec:
+  podSelector:
+    matchLabels:
+      app: api
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: frontend
+      ports:
+        - protocol: TCP
+          port: 8000
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-workflows-to-api
+  namespace: demo
+  labels:
+    app.kubernetes.io/version: "1.0.0"
+  annotations:
+    repair.example.dev/source-path: deploy/demo/networkpolicy.yaml
+spec:
+  podSelector:
+    matchLabels:
+      app: api
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchExpressions:
+              - key: workflows.argoproj.io/workflow
+                operator: Exists
+      ports:
+        - protocol: TCP
+          port: 8000
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-api-to-redis
+  namespace: demo
+  labels:
+    app.kubernetes.io/version: "1.0.0"
+  annotations:
+    repair.example.dev/source-path: deploy/demo/networkpolicy.yaml
+spec:
+  podSelector:
+    matchLabels:
+      app: redis
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: api
+      ports:
+        - protocol: TCP
+          port: 6379
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-worker-to-redis
+  namespace: demo
+  labels:
+    app.kubernetes.io/version: "1.0.0"
+  annotations:
+    repair.example.dev/source-path: deploy/demo/networkpolicy.yaml
+spec:
+  podSelector:
+    matchLabels:
+      app: redis
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: worker
+      ports:
+        - protocol: TCP
+          port: 6379
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ingress-to-frontend
+  namespace: demo
+  labels:
+    app.kubernetes.io/version: "1.0.0"
+  annotations:
+    repair.example.dev/source-path: deploy/demo/networkpolicy.yaml
+spec:
+  podSelector:
+    matchLabels:
+      app: frontend
+  policyTypes:
+    - Ingress
+  ingress:
+    - ports:
+        - protocol: TCP
+          port: 80
