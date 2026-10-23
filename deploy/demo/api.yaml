@@ -28,8 +28,6 @@ spec:
           env:
             - name: APP_VERSION
               value: "1.0.0"
-            - name: DB_URL
-              value: "postgres://example"
           envFrom:
             - configMapRef:
                 name: api-config
