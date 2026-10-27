@@ -29,10 +29,10 @@ spec:
               readOnly: true
           resources:
             requests:
-              memory: 32Mi
+              memory: 64Gi
               cpu: 25m
             limits:
-              memory: 64Mi
+              memory: 96Gi
               cpu: 250m
       volumes:
         - name: code
