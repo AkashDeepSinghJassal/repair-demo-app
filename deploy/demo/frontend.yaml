@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: nginx:1.27-doesnotexist
+          image: nginx:1.27-alpine
           ports:
             - containerPort: 80
           volumeMounts:
