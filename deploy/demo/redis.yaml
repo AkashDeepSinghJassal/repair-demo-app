@@ -22,7 +22,7 @@ spec:
       containers:
         - name: redis
           image: redis:7-alpine
-          args: ["--maxmemory", "32mb", "--maxmemory-policy", "allkeys-lfu-max"]
+          args: ["--maxmemory", "32mb", "--maxmemory-policy", "allkeys-lru"]
           ports:
             - containerPort: 6379
           readinessProbe:
