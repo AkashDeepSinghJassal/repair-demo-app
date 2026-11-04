@@ -12,7 +12,7 @@ spec:
   arguments:
     parameters:
       - name: mode
-        value: strict
+        value: stirct
   templates:
     - name: release
       steps:
