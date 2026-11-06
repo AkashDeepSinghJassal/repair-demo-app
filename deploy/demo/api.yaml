@@ -9,7 +9,7 @@ metadata:
   annotations:
     repair.example.dev/source-path: deploy/demo/api.yaml
 spec:
-  replicas: 0
+  replicas: 1
   selector:
     matchLabels:
       app: api
