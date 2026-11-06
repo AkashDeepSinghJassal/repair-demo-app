@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: api-b-config
+  name: api-b-config-v2
   namespace: demo-b
   labels:
     app.kubernetes.io/version: "1.0.0"
