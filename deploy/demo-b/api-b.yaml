@@ -19,9 +19,11 @@ spec:
         app: api-b
         app.kubernetes.io/version: "1.0.0"
     spec:
+      imagePullSecrets:
+        - name: regcred
       containers:
         - name: api-b
-          image: python:3.12-alpine
+          image: ghcr.io/akashdeepsinghjassal/api-b-private:1.0.0
           command: ["python", "/app/app.py"]
           ports:
             - containerPort: 8000
