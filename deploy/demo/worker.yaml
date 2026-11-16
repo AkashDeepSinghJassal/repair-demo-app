@@ -9,7 +9,7 @@ metadata:
   annotations:
     repair.example.dev/source-path: deploy/demo/worker.yaml
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: worker
@@ -19,6 +19,13 @@ spec:
         app: worker
         app.kubernetes.io/version: "1.0.0"
     spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchLabels:
+                  app: worker
+              topologyKey: kubernetes.io/hostname
       containers:
         - name: worker
           image: python:3.12-alpine
