@@ -19,8 +19,6 @@ spec:
         app: frontend
         app.kubernetes.io/version: "1.0.0"
     spec:
-      nodeSelector:
-        disktype: ssd
       containers:
         - name: frontend
           image: nginx:1.27-alpine
