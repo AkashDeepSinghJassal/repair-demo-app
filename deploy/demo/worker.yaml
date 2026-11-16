@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: worker
-          image: python:3.12-alpine3.99
+          image: python:3.12-alpine
           command: ["python", "/app/worker.py"]
           volumeMounts:
             - name: code
