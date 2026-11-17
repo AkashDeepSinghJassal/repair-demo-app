@@ -42,7 +42,7 @@ spec:
       volumes:
         - name: data
           persistentVolumeClaim:
-            claimName: redis-data
+            claimName: redis-data-standard
 ---
 apiVersion: v1
 kind: Service
@@ -65,11 +65,11 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: redis-data
+  name: redis-data-standard
   namespace: demo
 spec:
   accessModes: ["ReadWriteOnce"]
-  storageClassName: fast-ssd
+  storageClassName: standard
   resources:
     requests:
       storage: 1Gi
