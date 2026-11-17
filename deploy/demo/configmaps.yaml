@@ -6,6 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/version: "1.0.0"
 data:
+  DB_URL: redis://redis:6379
   LOG_LEVEL: info
 ---
 apiVersion: v1
